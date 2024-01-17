@@ -1,0 +1,27 @@
+USE Store
+
+SELECT p.name, pr.name
+FROM Products p RIGHT OUTER JOIN Producer pr ON p.id_producer = pr.id
+
+SELECT p.name, c.name
+FROM Products p RIGHT OUTER JOIN Category c ON p.id_category = c.id
+WHERE p.name IS NULL 
+
+
+SELECT name
+FROM Region
+EXCEPT 
+SELECT rg.name
+FROM Products p JOIN Producer pr ON p.id_producer = pr.id
+JOIN Address a ON pr.id_adress = a.id
+JOIN City c ON a.id_city = c.id
+JOIN Region rg ON c.id_region = rg.id
+
+
+SELECT name
+FROM Category
+EXCEPT
+SELECT c.name
+FROM Products p JOIN Category c ON p.id_category = c.id
+JOIN Producer pr ON p.id_producer = pr.id
+WHERE pr.name = 'Сад'
